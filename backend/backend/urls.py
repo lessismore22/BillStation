@@ -15,8 +15,31 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.http import JsonResponse
+from auth_service import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+def health_check(request):
+    return JsonResponse({'status': 'healthy', 'service': 'auth_service'})
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/auth/', include('auth_service.urls')),
+    path('health/', health_check, name='health_check'),
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+    path('profile/', views.profile, name='profile'),
+    path('profile/update/', views.update_profile, name='update_profile'),
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    path('reset-password/', views.reset_password, name='reset_password'),
+    path('change-password/', views.change_password, name='change_password'),
+    path('refresh/', views.refresh_token, name='refresh_token'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh')
 ]
