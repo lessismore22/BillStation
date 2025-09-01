@@ -1,0 +1,11 @@
+.env
+.env*.local
+.vscode/
+*.tsbuildinfo
+next-env.d.ts
+.vscode/
+*.log
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
