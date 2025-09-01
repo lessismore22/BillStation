@@ -1,20 +1,20 @@
-# 🔐 Django Auth Service
+#  Django Auth Service
 
 A robust, production-ready user authentication system built with Django REST Framework, featuring JWT authentication, PostgreSQL database, Redis caching, and secure password management.
 
-## ✨ Features
+##  Features
 
-- 🔑 **Email-based Authentication** - Modern approach without usernames
-- 🎫 **JWT Token Management** - Secure access/refresh token system
-- 🔒 **Redis-Cached Password Reset** - Time-limited tokens for security
-- 📧 **Email Integration** - Beautiful HTML templates for notifications
-- 🛡️ **Advanced Security** - Token blacklisting, IP tracking, validation
-- 🐳 **Docker Ready** - One-command local development setup
-- 🚀 **Cloud Deployable** - Railway, Render, and Docker configurations
-- 📊 **User Management** - Profiles, password changes, activity logs
-- 🧪 **Testing Suite** - Comprehensive API test coverage
+-  **Email-based Authentication** - Modern approach without usernames
+-  **JWT Token Management** - Secure access/refresh token system
+-  **Redis-Cached Password Reset** - Time-limited tokens for security
+-  **Email Integration** - Beautiful HTML templates for notifications
+-  **Advanced Security** - Token blacklisting, IP tracking, validation
+-  **Docker Ready** - One-command local development setup
+-  **Cloud Deployable** - Railway, Render, and Docker configurations
+-  **User Management** - Profiles, password changes, activity logs
+-  **Testing Suite** - Comprehensive API test coverage
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Python 3.11+
@@ -92,7 +92,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-🎉 **API ready at:** http://localhost:8000/api/auth/
+ **API ready at:** http://localhost:8000/api/auth/
 
 ### 5. Test API
 
@@ -100,7 +100,7 @@ python manage.py runserver
 python test_api.py
 ```
 
-## 📖 API Reference
+##  API Reference
 
 ### Base URL: `http://localhost:8000/api/auth/`
 
@@ -152,7 +152,7 @@ curl -X GET localhost:8000/api/auth/profile/ \
   -H "Authorization: Bearer <your_token>"
 ```
 
-## 🐳 Docker Development
+##  Docker Development
 
 ```bash
 # Start all services
@@ -173,21 +173,7 @@ Services available:
 - **PostgreSQL:** localhost:5432
 - **Redis:** localhost:6379
 
-## 🚀 Deployment
-
-### Railway
-
-```bash
-# Install CLI
-npm install -g @railway/cli
-
-# Deploy
-railway login
-railway init
-railway add postgresql
-railway add redis
-railway up
-```
+##  Deployment
 
 ### Render
 
@@ -206,12 +192,12 @@ docker build -t auth-service .
 docker run -p 8000:8000 --env-file .env auth-service
 ```
 
-## ⚙️ Configuration
+##  Configuration
 
 ### JWT Tokens
 
 ```env
-JWT_ACCESS_TOKEN_LIFETIME=15    # 15 minutes
+JWT_ACCESS_TOKEN_LIFETIME=10    # 10 minutes
 JWT_REFRESH_TOKEN_LIFETIME=7    # 7 days
 ```
 
@@ -239,18 +225,18 @@ EMAIL_HOST_USER=smtp_login
 EMAIL_HOST_PASSWORD=smtp_password
 ```
 
-## 🔐 Security Features
+##  Security Features
 
-- ✅ Email-based authentication (no username enumeration)
-- ✅ JWT with configurable expiry
-- ✅ Token blacklisting on logout
-- ✅ Password complexity validation
-- ✅ Time-limited password reset tokens
-- ✅ IP address tracking
-- ✅ CORS protection
-- ✅ Environment-based secrets
+-  Email-based authentication (no username enumeration)
+-  JWT with configurable expiry
+-  Token blacklisting on logout
+-  Password complexity validation
+-  Time-limited password reset tokens
+-  IP address tracking
+-  CORS protection
+-  Environment-based secrets
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 auth_service/
@@ -269,7 +255,7 @@ auth_service/
 └── .env                  # Environment variables
 ```
 
-## 🧪 Testing
+##  Testing
 
 ```bash
 # API test suite
@@ -284,7 +270,7 @@ coverage run manage.py test
 coverage report
 ```
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 **Database Issues:**
 ```bash
@@ -316,7 +302,7 @@ redis-cli flushall
 - Ensure server time is correct
 - Clear Redis cache if needed
 
-## 🤝 Contributing
+##  Contributing
 
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature/new-feature`
@@ -324,11 +310,7 @@ redis-cli flushall
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
+##  Support
 
 Need help? 
 
@@ -341,6 +323,6 @@ Need help?
 
 ---
 
-**Built with ❤️ using Django, PostgreSQL, and Redis**
+**Built with  using Django, PostgreSQL, and Redis**
 
-⭐ **Star this repo if it helped you!**
+ **Star this repo if it helped you!**
