@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 #  Django Auth Service
 
 A robust, production-ready user authentication system built with Django REST Framework, featuring JWT authentication, PostgreSQL database, Redis caching, and secure password management.
@@ -15,6 +17,32 @@ A robust, production-ready user authentication system built with Django REST Fra
 -  **Testing Suite** - Comprehensive API test coverage
 
 ##  Quick Start
+=======
+# 🔐 Django Auth Service
+=======
+#  Django Auth Service
+>>>>>>> 7fea630 (modified the README.md)
+
+A robust, production-ready user authentication system built with Django REST Framework, featuring JWT authentication, PostgreSQL database, Redis caching, and secure password management.
+
+##  Features
+
+-  **Email-based Authentication** - Modern approach without usernames
+-  **JWT Token Management** - Secure access/refresh token system
+-  **Redis-Cached Password Reset** - Time-limited tokens for security
+-  **Email Integration** - Beautiful HTML templates for notifications
+-  **Advanced Security** - Token blacklisting, IP tracking, validation
+-  **Docker Ready** - One-command local development setup
+-  **Cloud Deployable** - Railway, Render, and Docker configurations
+-  **User Management** - Profiles, password changes, activity logs
+-  **Testing Suite** - Comprehensive API test coverage
+
+<<<<<<< HEAD
+## 🚀 Quick Start
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Quick Start
+>>>>>>> 7fea630 (modified the README.md)
 
 ### Prerequisites
 - Python 3.11+
@@ -92,7 +120,15 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
  **API ready at:** http://localhost:8000/api/auth/
+=======
+🎉 **API ready at:** http://localhost:8000/api/auth/
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+ **API ready at:** http://localhost:8000/api/auth/
+>>>>>>> 7fea630 (modified the README.md)
 
 ### 5. Test API
 
@@ -100,7 +136,15 @@ python manage.py runserver
 python test_api.py
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  API Reference
+=======
+## 📖 API Reference
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  API Reference
+>>>>>>> 7fea630 (modified the README.md)
 
 ### Base URL: `http://localhost:8000/api/auth/`
 
@@ -152,7 +196,15 @@ curl -X GET localhost:8000/api/auth/profile/ \
   -H "Authorization: Bearer <your_token>"
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Docker Development
+=======
+## 🐳 Docker Development
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Docker Development
+>>>>>>> 7fea630 (modified the README.md)
 
 ```bash
 # Start all services
@@ -173,7 +225,29 @@ Services available:
 - **PostgreSQL:** localhost:5432
 - **Redis:** localhost:6379
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Deployment
+=======
+## 🚀 Deployment
+
+### Railway
+
+```bash
+# Install CLI
+npm install -g @railway/cli
+
+# Deploy
+railway login
+railway init
+railway add postgresql
+railway add redis
+railway up
+```
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Deployment
+>>>>>>> 7fea630 (modified the README.md)
 
 ### Render
 
@@ -192,12 +266,28 @@ docker build -t auth-service .
 docker run -p 8000:8000 --env-file .env auth-service
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Configuration
+=======
+## ⚙️ Configuration
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Configuration
+>>>>>>> 7fea630 (modified the README.md)
 
 ### JWT Tokens
 
 ```env
+<<<<<<< HEAD
+<<<<<<< HEAD
 JWT_ACCESS_TOKEN_LIFETIME=10    # 10 minutes
+=======
+JWT_ACCESS_TOKEN_LIFETIME=15    # 15 minutes
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+JWT_ACCESS_TOKEN_LIFETIME=10    # 10 minutes
+>>>>>>> 7fea630 (modified the README.md)
 JWT_REFRESH_TOKEN_LIFETIME=7    # 7 days
 ```
 
@@ -225,6 +315,8 @@ EMAIL_HOST_USER=smtp_login
 EMAIL_HOST_PASSWORD=smtp_password
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Security Features
 
 -  Email-based authentication (no username enumeration)
@@ -237,6 +329,27 @@ EMAIL_HOST_PASSWORD=smtp_password
 -  Environment-based secrets
 
 ##  Project Structure
+=======
+## 🔐 Security Features
+=======
+##  Security Features
+>>>>>>> 7fea630 (modified the README.md)
+
+-  Email-based authentication (no username enumeration)
+-  JWT with configurable expiry
+-  Token blacklisting on logout
+-  Password complexity validation
+-  Time-limited password reset tokens
+-  IP address tracking
+-  CORS protection
+-  Environment-based secrets
+
+<<<<<<< HEAD
+## 📁 Project Structure
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Project Structure
+>>>>>>> 7fea630 (modified the README.md)
 
 ```
 auth_service/
@@ -255,7 +368,15 @@ auth_service/
 └── .env                  # Environment variables
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Testing
+=======
+## 🧪 Testing
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Testing
+>>>>>>> 7fea630 (modified the README.md)
 
 ```bash
 # API test suite
@@ -270,7 +391,15 @@ coverage run manage.py test
 coverage report
 ```
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Troubleshooting
+=======
+## 🐛 Troubleshooting
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Troubleshooting
+>>>>>>> 7fea630 (modified the README.md)
 
 **Database Issues:**
 ```bash
@@ -302,7 +431,15 @@ redis-cli flushall
 - Ensure server time is correct
 - Clear Redis cache if needed
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Contributing
+=======
+## 🤝 Contributing
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Contributing
+>>>>>>> 7fea630 (modified the README.md)
 
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature/new-feature`
@@ -310,7 +447,19 @@ redis-cli flushall
 4. Push to branch: `git push origin feature/new-feature`
 5. Submit Pull Request
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 ##  Support
+=======
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+##  Support
+>>>>>>> 7fea630 (modified the README.md)
 
 Need help? 
 
@@ -323,6 +472,18 @@ Need help?
 
 ---
 
+<<<<<<< HEAD
+<<<<<<< HEAD
 **Built with  using Django, PostgreSQL, and Redis**
 
  **Star this repo if it helped you!**
+=======
+**Built with ❤️ using Django, PostgreSQL, and Redis**
+
+⭐ **Star this repo if it helped you!**
+>>>>>>> 1e85d32 (updated the README.md)
+=======
+**Built with  using Django, PostgreSQL, and Redis**
+
+ **Star this repo if it helped you!**
+>>>>>>> 7fea630 (modified the README.md)
