@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 from django.utils import timezone
 from .serializers import (
     UserRegistrationSerializer, 
@@ -24,6 +25,9 @@ from .utils import (
 )
 
 User = get_user_model()
+
+def home(request):
+    return HttpResponse("<h1>Welcome to Authentication service homepage</h1>")
 
 def get_tokens_for_user(user):
     """Generate JWT tokens for user"""
