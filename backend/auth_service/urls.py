@@ -5,7 +5,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-app_name = 'authentication'
+app_name = 'auth_service'
 
 urlpatterns = [
     path('', views.home, name='home'),
