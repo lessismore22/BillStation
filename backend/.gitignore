@@ -11,3 +11,6 @@ next-env.d.ts
 .env.test.local
 .env.production.localenv/
 pipenvenv/
+.env
+__pycache__/
+*.pyc
