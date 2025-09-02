@@ -34,11 +34,7 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
-=======
-ALLOWED_HOSTS = ['ALLOWED HOSTS']
->>>>>>> 8676a80 (allowed hosts changes)
 
 
 # Application definition
