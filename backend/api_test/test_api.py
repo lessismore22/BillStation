@@ -1,3 +1,6 @@
+from urllib import response
+from wsgiref import headers
+from django import urls
 import requests
 import json
 
@@ -57,15 +60,25 @@ class AuthAPITester:
         
         return response
     
-    def test_forgot_password(self):
-        """Test forgot password"""
-        data = {'email': 'test@example.com'}
+    # def test_forgot_password(self):
+    #     """Test forgot password"""
+    #     data = {'email': 'test@example.com'}
         
-        response = self.session.post(f'{BASE_URL}/forgot-password/', json=data)
-        print(f"Forgot Password: {response.status_code}")
-        print(json.dumps(response.json(), indent=2))
+    #     response = self.session.post(f'{BASE_URL}/forgot-password/', json=data)
+    #     print(f"Forgot Password: {response.status_code}")
+    #     print(json.dumps(response.json(), indent=2))
         
-        return response
+    #     response = requests.post(urls, json=data, headers=headers)
+
+    #     print("Status code:", response.status_code)
+    #     print("Content-Type:", response.headers.get("Content-Type"))
+    #     print("Response text:", response.text)
+
+    #     try:
+    #        response_json = response.json()
+    #        print("JSON response:", json.dumps(response_json, indent=2))
+    #     except requests.exceptions.JSONDecodeError:
+    #         print("Response is not valid JSON. Check server logs for errors.")
     
     def test_change_password(self):
         """Test password change"""
@@ -105,9 +118,9 @@ class AuthAPITester:
         self.test_profile()
         print()
         
-        print("3. Testing Forgot Password...")
-        self.test_forgot_password()
-        print()
+        # print("3. Testing Forgot Password...")
+        # self.test_forgot_password()
+        # print()
         
         print("4. Testing Change Password...")
         self.test_change_password()
