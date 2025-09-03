@@ -34,7 +34,7 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'billstation-3.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'billstation-3.onrender.com', 'billstation-4.onrender.com']
 
 
 # Application definition
@@ -147,6 +147,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://billstation-3.onrender.com",
+    "https://billstation-4.onrender.com"
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -222,7 +223,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
