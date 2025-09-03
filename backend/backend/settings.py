@@ -34,7 +34,7 @@ SECRET_KEY = 'SECRET_KEY'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://billstation-3.onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1'].split(',')
 
 
 # Application definition
