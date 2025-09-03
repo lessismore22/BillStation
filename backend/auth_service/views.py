@@ -4,7 +4,10 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+import json
 from django.http import HttpResponse
 from django.utils import timezone
 from .serializers import (
@@ -25,6 +28,18 @@ from .utils import (
 )
 
 User = get_user_model()
+
+class MyView(APIView):
+    def post(self, request):
+        raw_data = request.body.decode('utf-8')
+
+        # Clean invalid control characters
+        cleaned = ''.join(c if c >= ' ' or c in '\n\t' else '' for c in raw_data)
+
+        data = json.loads(cleaned)
+
+        # Now data is safe to use
+        return Response({"received": data})
 
 def home(request):
     return HttpResponse("<h1>Welcome to Authentication service homepage</h1>")
