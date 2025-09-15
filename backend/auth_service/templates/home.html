@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        .endpoints-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .endpoint-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid;
+        }
+
+        .endpoint-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .method-post { border-left-color: #28a745; }
+        .method-get { border-left-color: #007bff; }
+        .method-put { border-left-color: #ffc107; }
+
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .method-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-right: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .post { background: #28a745; color: white; }
+        .get { background: #007bff; color: white; }
+        .put { background: #ffc107; color: #333; }
+
+        .endpoint-path {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .endpoint-description {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .auth-required {
+            display: inline-block;
+            background: #dc3545;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .auth-not-required {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fields-section h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .field-list {
+            list-style: none;
+        }
+
+        .field-item {
+            background: #f8f9fa;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            border-left: 3px solid #007bff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .field-name {
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .field-type {
+            background: #007bff;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .required { border-left-color: #dc3545; }
+        .required .field-type { background: #dc3545; }
+
+        .response-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .response-code {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            margin-right: 10px;
+        }
+
+        .testing-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .testing-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .base-url {
+            font-family: 'Monaco', 'Menlo', monospace;
+            background: #333;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .note {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .note-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .endpoints-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 Authentication API</h1>
+            <p>Complete documentation for all authentication endpoints</p>
+        </div>
+
+        <div class="endpoints-grid">
+            <!-- Registration Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/register/</span>
+                </div>
+                <div class="endpoint-description">Register a new user account</div>
+                <div class="auth-not-required">🔓 No Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">full_name</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item required">
+                            <span class="field-name">email</span>
+                            <span class="field-type">email</span>
+                        </li>
+                        <li class="field-item required">
+                            <span class="field-name">password</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item">
+                            <span class="field-name">password_confirm</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">201</span>User created successfully with JWT tokens
+                </div>
+            </div>
+
+            <!-- Login Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/login/</span>
+                </div>
+                <div class="endpoint-description">Authenticate user and receive JWT tokens</div>
+                <div class="auth-not-required">🔓 No Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">email</span>
+                            <span class="field-type">email</span>
+                        </li>
+                        <li class="field-item required">
+                            <span class="field-name">password</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Login successful with JWT tokens
+                </div>
+            </div>
+
+            <!-- Logout Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/logout/</span>
+                </div>
+                <div class="endpoint-description">Logout user and blacklist refresh token</div>
+                <div class="auth-required">🔒 Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">refresh</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Logout successful
+                </div>
+            </div>
+
+            <!-- Profile Endpoint -->
+            <div class="endpoint-card method-get">
+                <div class="endpoint-header">
+                    <span class="method-badge get">GET</span>
+                    <span class="endpoint-path">/api/profile/</span>
+                </div>
+                <div class="endpoint-description">Get current user profile information</div>
+                <div class="auth-required">🔒 Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <span class="field-name">No body required</span>
+                            <span class="field-type">-</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>User profile data
+                </div>
+            </div>
+
+            <!-- Update Profile Endpoint -->
+            <div class="endpoint-card method-put">
+                <div class="endpoint-header">
+                    <span class="method-badge put">PUT</span>
+                    <span class="endpoint-path">/api/profile/update/</span>
+                </div>
+                <div class="endpoint-description">Update user profile information</div>
+                <div class="auth-required">🔒 Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Optional Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item">
+                            <span class="field-name">first_name</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item">
+                            <span class="field-name">last_name</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item">
+                            <span class="field-name">email</span>
+                            <span class="field-type">email</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Profile updated successfully
+                </div>
+            </div>
+
+            <!-- Forgot Password Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/forgot-password/</span>
+                </div>
+                <div class="endpoint-description">Request password reset email</div>
+                <div class="auth-not-required">🔓 No Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">email</span>
+                            <span class="field-type">email</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Reset link sent if email exists
+                </div>
+            </div>
+
+            <!-- Reset Password Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/reset-password/</span>
+                </div>
+                <div class="endpoint-description">Reset password using token from email</div>
+                <div class="auth-not-required">🔓 No Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">token</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item required">
+                            <span class="field-name">password</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Password reset successful
+                </div>
+            </div>
+
+            <!-- Change Password Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/change-password/</span>
+                </div>
+                <div class="endpoint-description">Change password for authenticated user</div>
+                <div class="auth-required">🔒 Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">old_password</span>
+                            <span class="field-type">string</span>
+                        </li>
+                        <li class="field-item required">
+                            <span class="field-name">new_password</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>Password changed successfully
+                </div>
+            </div>
+
+            <!-- Refresh Token Endpoint -->
+            <div class="endpoint-card method-post">
+                <div class="endpoint-header">
+                    <span class="method-badge post">POST</span>
+                    <span class="endpoint-path">/api/refresh-token/</span>
+                </div>
+                <div class="endpoint-description">Get new access token using refresh token</div>
+                <div class="auth-required">🔒 Authentication Required</div>
+                
+                <div class="fields-section">
+                    <h4>Required Fields:</h4>
+                    <ul class="field-list">
+                        <li class="field-item required">
+                            <span class="field-name">refresh</span>
+                            <span class="field-type">string</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="response-section">
+                    <span class="response-code">200</span>New access token provided
+                </div>
+            </div>
+        </div>
+
+        <div class="testing-section">
+            <h2>🚀 Testing Information</h2>
+            <div class="base-url">Base URL: http://your-domain.com/api/</div>
+            
+            <div class="note">
+                <div class="note-title">📝 Authentication Notes:</div>
+                <p>• For endpoints requiring authentication, include JWT token in headers: <code>Authorization: Bearer &lt;access_token&gt;</code></p>
+                <p>• Refresh tokens when access tokens expire using the refresh-token endpoint</p>
+                <p>• All POST requests should include <code>Content-Type: application/json</code></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.endpoint-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Add copy functionality to endpoint paths
+            const paths = document.querySelectorAll('.endpoint-path');
+            paths.forEach(path => {
+                path.style.cursor = 'pointer';
+                path.title = 'Click to copy endpoint path';
+                
+                path.addEventListener('click', function() {
+                    navigator.clipboard.writeText(this.textContent);
+                    
+                    // Show feedback
+                    const original = this.textContent;
+                    this.textContent = 'Copied! ✓';
+                    this.style.color = '#28a745';
+                    
+                    setTimeout(() => {
+                        this.textContent = original;
+                        this.style.color = '#333';
+                    }, 1500);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

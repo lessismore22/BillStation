@@ -7,6 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
+from django.template.response import TemplateResponse
 import json
 from django.http import HttpResponse
 from django.utils import timezone
@@ -42,7 +43,11 @@ class MyView(APIView):
         return Response({"received": data})
 
 def home(request):
-    return HttpResponse("<h1>Welcome to Authentication service homepage</h1>")
+    context = {
+        'base_url': request.build_absolute_uri('/api/'),
+        'app_name': 'auth_service',
+    }
+    return render(request, 'home.html', context)
 
 def get_tokens_for_user(user):
     """Generate JWT tokens for user"""
